@@ -40,6 +40,16 @@ def Login():
     users = users.val()
     users = json.dumps(users, indent=2)
     users = json.loads(users)
+    print(users)
+    count = []
+    for (key, value) in users.items():
+        if(str(key)==str(username)):
+            count.append(key)
+    count = len(count)
+    if count == 0:
+        with popup("Login Error:"):
+            put_text("Sorry, incorrect Username/Password!")
+            return
     for (k, v) in users.items():
         if(str(k)==str(username)):
             if(str(v["Password"])==str(password)):
@@ -55,7 +65,7 @@ def Login():
                         Gen_Pass()
             else:
                 with popup("Login Error:"):
-                    put_text("Sorry, incorrect Username/Password!")
+                    put_text("Sorry, incorrect Username/Password!")            
 
 def Add_Account(name):
     account = input("Please enter an account：", type=TEXT, placeholder='Ex, Facebook or Google or Discord',required=True)
